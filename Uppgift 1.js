@@ -1,76 +1,31 @@
-// TASK 2
+// TASK 1
 
 const WIDTH = 400;
 const HEIGHT = 300;
 const FPS = 15;
 
 /**
- * Copies the contents from one array to another.
- * @param {array} src - contains information to be copied
- * @param {array} dest - array where information is copied into
+ * TODO: Complete specification here
+ *
+ * @param {...} src - ...
+ * @param {...} dest - ...
  */
-function copy(src, dest) {
+function my_first_filter(src, dest) {
     const width = image_width();
     const height = image_height();
 
-    for (let i = 0; i < height; i = i + 1) {
-        for (let j = 0; j < width; j = j + 1) {
-           dest[i][j][0] = src[i][j][0];
-           dest[i][j][1] = src[i][j][1];
-           dest[i][j][2] = src[i][j][2];
-           dest[i][j][3] = src[i][j][3];
+    // modify the code here
+    for (let y = 0; y < height; y = y + 1) {
+        for (let x = 0; x < width; x = x + 1) {
+            dest[y][x][0] = 255 * (y/height); // invert red intensity
+            dest[y][x][1] = 255 *(x/width); // invert green intensity
+            dest[y][x][2] = 255 * ((width - x - y)/width); // invert blue intensity
+            dest[y][x][3] = 255;                // always 255
         }
     }
 }
 
-/**
- * Your specification goes here
- */
-function crosshair(src, dest) {
-    // your program
-        const width = image_width();
-        const height = image_height();
-        for (let i = 0; i < height; i = i + 1) {
-            for (let j = 0; j < width; j = j + 1) {
-                dest[150][j][0] = src[i][j][0];
-                dest[i][j][1] = src[i][j][1];
-                dest[i][j][2] = src[i][j][2];
-                dest[i][j][3] = src[i][j][3];
-                let radius = math_sqrt(math_pow((i-(height/2)), 2) +
-            math_pow((j -(width/2)), 2));
-            
-            for (let x = 25; x < width; x = x + 50){
-                
-                if(radius> x && radius< x+25){
-                    dest[i][j][2]= 255;
-                    break;
-                }
-            }
-            }
-        }
-        for (let i = 0; i < height; i = i + 1) {
-            for (let j = 0; j < width; j = j + 1) {
-                dest[i][200][0] = src[i][j][0];
-                dest[i][j][1] = src[i][j][1];
-                dest[i][j][2] = src[i][j][2];
-                dest[i][j][3] = src[i][j][3];
-               let radius = math_sqrt(math_pow((i-(height/2)), 2) +
-            math_pow((j -(width/2)), 2));
-            
-            for (let x = 25; x < width; x = x + 50){
-                
-                if(radius> x && radius< x+25){
-                    dest[i][j][2]= 255;
-                    break;
-                }
-            }
-            }
-        }
-    
-}
-
-//install_filter(copy);
-install_filter(crosshair);  // use this filter when crosshair function is ready.
+install_filter(my_first_filter);
 set_dimensions(WIDTH, HEIGHT);
 keep_aspect_ratio(true);
 set_fps(FPS);
